@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "48671377662",
+    "project_id": "kaos-chattie",
+    "storage_bucket": "kaos-chattie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48671377662:android:fc6f5bc63b39b0f89ebdaf",
+        "android_client_info": {
+          "package_name": "dev.kaosmpd.chattie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48671377662-ktptkth4li0kpjgtfr8tjuf2f3fti7dn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY2SOLb7eRQy_OIr5V9QFRKW_g8dvqEOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48671377662-ktptkth4li0kpjgtfr8tjuf2f3fti7dn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
