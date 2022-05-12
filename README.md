@@ -7,6 +7,6 @@ Feel free to clone and run Chattie yourself:
 ```sh
 git clone https://github.com/nhhao/chattie
 cd chattie
-flutter  pub get
+flutter pub get
 flutter run 
 ```
