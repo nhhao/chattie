@@ -1,4 +1,5 @@
 import 'package:chattie/functions/utils.dart';
+import 'package:chattie/pages/add_contact.dart';
 import 'package:chattie/utils/constants.dart';
 import 'package:chattie/widgets/ui/base_divider.dart';
 import 'package:flutter/material.dart';
@@ -28,18 +29,36 @@ class CustomAppBar extends StatelessWidget {
     Widget trailing() {
       switch (tabItem) {
         case TabItems.contacts:
-          return SvgPicture.asset('assets/icons/linear/add_people.svg');
+          return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddContact(),
+                  ),
+                );
+              },
+              child: SvgPicture.asset('assets/icons/linear/add_people.svg'));
         case TabItems.setting:
           return SvgPicture.asset('assets/icons/linear/add_people.svg');
         default:
-          return SvgPicture.asset('assets/icons/linear/add_people.svg');
+          return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddContact(),
+                  ),
+                );
+              },
+              child: SvgPicture.asset('assets/icons/linear/add_people.svg'));
       }
     }
 
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: appBarPadding,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

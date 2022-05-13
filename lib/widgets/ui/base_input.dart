@@ -7,12 +7,14 @@ class BaseInput extends StatelessWidget {
       required this.labelText,
       required this.controller,
       this.isObscureText = false,
-      this.onTap})
+      this.onTap,
+      this.onChanged})
       : super(key: key);
   final String labelText;
   final TextEditingController controller;
   final bool isObscureText;
   final VoidCallback? onTap;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class BaseInput extends StatelessWidget {
       child: TextField(
         controller: controller,
         onTap: onTap,
+        onChanged: onChanged,
         cursorColor: greyTextColor,
         obscureText: isObscureText,
         decoration: InputDecoration(
@@ -34,10 +37,11 @@ class BaseInput extends StatelessWidget {
             borderSide: const BorderSide(
               color: Color(0xFFC9C9C9),
             ),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: primaryColor),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: primaryColor),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
       ),
