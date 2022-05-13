@@ -1,7 +1,6 @@
 import 'package:chattie/controllers/auth.dart';
 import 'package:chattie/firebase_options.dart';
 import 'package:chattie/pages/home_page.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +11,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    DevicePreview(
-      builder: (context) {
-        return const ProviderScope(
-          child: MaterialApp(
-            home: App(),
-            debugShowCheckedModeBanner: false,
-            useInheritedMediaQuery: true,
-          ),
-        );
-      },
+  runApp(const ProviderScope(
+    child: MaterialApp(
+      home: App(),
+      debugShowCheckedModeBanner: false,
+      useInheritedMediaQuery: true,
     ),
-  );
+  ));
 }
 
 class App extends StatelessWidget {

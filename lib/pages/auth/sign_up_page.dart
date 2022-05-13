@@ -1,11 +1,13 @@
 import 'package:chattie/functions/validate.dart';
 import 'package:chattie/models/user_model.dart';
+import 'package:chattie/providers/providers.dart';
 import 'package:chattie/utils/constants.dart';
 import 'package:chattie/widgets/ui/base_button.dart';
 import 'package:chattie/widgets/ui/base_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -56,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
       return false;
     }
 
-    void handleSignUp() async {
+    void handleSignUp(WidgetRef ref) async {
       if (isSomeFieldsNotValid()) return;
 
       final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -79,6 +81,9 @@ class _SignUpPageState extends State<SignUpPage> {
           email: _emailController.text,
           password: _passwordController.text,
         );
+
+        ref.refresh(currentUserUidProvider);
+
         final UserModel user = UserModel(
             uid: response.user!.uid, username: _usernameController.text);
 
@@ -86,6 +91,10 @@ class _SignUpPageState extends State<SignUpPage> {
             .collection('users')
             .doc(_usernameController.text)
             .set(user.userInfo());
+
+        await db.collection('contacts').doc(_usernameController.text).set({
+          'contacts': [],
+        });
       } on FirebaseAuthException catch (e) {
         setState(() {
           _errorMessage = e.message!;
@@ -169,14 +178,16 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 24,
                   ),
-                  BaseButton(
-                    onTap: handleSignUp,
-                    child: const Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: calloutTextSize,
-                        fontWeight: FontWeight.w500,
+                  Consumer(
+                    builder: (context, ref, _) => BaseButton(
+                      onTap: () => handleSignUp(ref),
+                      child: const Text(
+                        'Sign up',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: calloutTextSize,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),

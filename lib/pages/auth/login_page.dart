@@ -1,9 +1,11 @@
 import 'package:chattie/functions/validate.dart';
+import 'package:chattie/providers/providers.dart';
 import 'package:chattie/utils/constants.dart';
 import 'package:chattie/widgets/ui/base_button.dart';
 import 'package:chattie/widgets/ui/base_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       return false;
     }
 
-    void handleLogin() async {
+    void handleLogin(WidgetRef ref) async {
       if (isSomeFieldsNotValid()) return;
 
       try {
@@ -52,6 +54,8 @@ class _LoginPageState extends State<LoginPage> {
           _errorMessage = e.message!;
         });
       }
+      ref.refresh(currentUserUidProvider);
+      ref.refresh(currentUserContactsProvider);
     }
 
     void handleHideErrorMessage() {
@@ -128,14 +132,16 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 24,
                   ),
-                  BaseButton(
-                    onTap: handleLogin,
-                    child: const Text(
-                      'Log in',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: calloutTextSize,
-                        fontWeight: FontWeight.w500,
+                  Consumer(
+                    builder: (context, ref, _) => BaseButton(
+                      onTap: () => handleLogin(ref),
+                      child: const Text(
+                        'Log in',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: calloutTextSize,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),

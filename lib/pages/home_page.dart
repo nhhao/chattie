@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       case TabItems.contacts:
         return const Contacts();
       case TabItems.setting:
-        return const Settings();
+        return const SettingsPage();
       default:
         return const Chats();
     }

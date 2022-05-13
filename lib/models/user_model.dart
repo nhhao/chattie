@@ -12,7 +12,7 @@ class UserModel {
   final String avatarUri;
   final bool isOnline;
   static const String defaultAvatarUri =
-      'https://firebasestorage.googleapis.com/v0/b/kaos-chattie.appspot.com/o/default%2Fdefault_avatar.png?alt=media&token=1066c847-73e0-41f0-bc02-c98441add03d';
+      'https://firebasestorage.googleapis.com/v0/b/kaos-chattie.appspot.com/o/default%2Fdefault_avatar.png?alt=media&token=43430264-0508-4f57-8fc6-465d4f24e8a4';
 
   Map<String, dynamic> userInfo() {
     return {
